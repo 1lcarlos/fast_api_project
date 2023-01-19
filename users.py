@@ -59,3 +59,17 @@ async def addUser(user: User):
         return {"error": "Usuario ya existe"}
     else:
         users_list.append(user)
+    return user
+
+@app.put("/user/")
+async def modifyUser(user:User):
+    found = False
+
+    for index, savedUser in enumerate(users_list):
+        if savedUser.id == user.id:
+            users_list[index]= user
+            found = True
+
+    if not found:
+            return {"error": "No se ha actualizado el dato del usuario"}
+    return user
