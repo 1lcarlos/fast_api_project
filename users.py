@@ -27,9 +27,17 @@ async def usersJson():
 
 @app.get("/user/{id}")
 async def userJson(id: int):
+    return searchUser(id)
+
+@app.get("/userquery")
+async def userJson(id: int):
+    return searchUser(id)
+    
+
+def searchUser(id: int):
     users = filter(lambda user: user.id == id, users_list)
     try:
         return list(users)[0]
 
     except: 
-        return {"Usuario no encontrado"}
+        return {"error":"Usuario no encontrado"}
